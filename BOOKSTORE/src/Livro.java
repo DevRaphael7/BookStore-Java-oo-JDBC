@@ -2,10 +2,10 @@ public class Livro {
     
     private String nome;
     private int quantPages;
-    private double preco;
+    private float preco;
     private String editora;
     private String descricao;
-    private Autor nomeDoAutor;
+    private Autor autor;
     
     public void setNome(String nome){
         if(nome == "") this.nome = "Nome invalido!";
@@ -19,7 +19,7 @@ public class Livro {
             this.quantPages = quantPages;
     }
 
-    public void setPreco(double preco){
+    public void setPreco(float preco){
         if(preco == 0) this.preco = 0;
         else 
             this.preco = preco;
@@ -35,8 +35,8 @@ public class Livro {
         this.descricao = descricao;
     }
 
-    public void setNomeDoAutor(Autor autor){
-        this.nomeDoAutor = autor;
+    public void setAutor(Autor autor){
+        this.autor = autor;
     }
 
     public String getNome(){
@@ -60,13 +60,13 @@ public class Livro {
     }
 
     public Autor getNomeDoAutor(){
-        return nomeDoAutor;
+        return autor;
     }
 
     public void informacoesDoLivro(){
-        System.out.println("----");
+        System.out.println("----(Informações do livro)");
         System.out.println("Nome: " + getNome());
-        System.out.println("Nome do autor: " + getNomeDoAutor());
+        System.out.println("Nome do autor: " + autor.getNome());
         System.out.println("Quantidade de páginas: " + getQuantPages());
         System.out.println("Preço: " + getPreco());
         System.out.println("Editora: " + getEditora());
@@ -75,17 +75,13 @@ public class Livro {
     }
 
     public boolean descontoPreco(double desconto){
+        desconto = desconto / 100;
         if(desconto > 0.30) return true;
-
         return false;
     }
 
-    public Livro(Autor autor, String editora, double preco){
-        this.nomeDoAutor = autor;
-        this.nome = "";
-        this.editora = "";
-        this.editora = editora;
-        this.preco = preco;
+    public Livro(Autor autor){
+        this.autor = autor;
     }
 
 }

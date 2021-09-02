@@ -1,13 +1,12 @@
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
 
         boolean looping = true;
-        String nome, nomeAutor, editora, descricao, endereco;
-        int quantPages, cpf, idade;
-        double price;
+        int escolha = 0;
 
+        Autor autor = new Autor(" ");
         Scanner input = new Scanner(System.in);
 
         while(looping){
@@ -20,42 +19,42 @@ public class App {
             System.out.println("5) Sair do programa");
             System.out.println("----\n");
 
-            int escolha = input.nextInt();
+            escolha = input.nextInt();
 
             switch(escolha){
                 case 1:
+                    try {
+                        Livro book = new Livro(autor);
+                        //Informações sobre o LIVRO
+                        System.out.println("Nome do autor do livro: ");
+                        autor.setNome(input.next());
 
-                    //Informações sobre o LIVRO
-                    System.out.println("Nome do livro: ");
-                    nome = input.next();
+                        System.out.println("Nome do livro: ");
+                        book.setNome(input.next());
 
-                    System.out.println("Autor do livro");
-                    nomeAutor = input.next();
+                        System.out.println("Preço do livro: ");
+                        // price = input.nextFloat();
+                        book.setPreco(input.nextFloat());
 
-                    System.out.println("Quantidade de páginas");
-                    quantPages = input.nextInt();
+                        System.out.println("Editora do livro: ");
+                        book.setEditora(input.nextLine());
 
-                    System.out.println("Preço: ");
-                    price = input.nextDouble();
+                        System.out.println("Descrição do livro: ");
+                        book.setDescricao(input.next());
 
-                    System.out.println("Editora: ");
-                    editora = input.next();
+                        System.out.println("Quantidade de páginas: ");
+                        book.setQuantPages(input.nextInt());
 
-                    System.out.println("Descrição: ");
-                    descricao = input.next();
-
-                    //Informações sobre o Autor
-                    System.out.println("CPF do autor: ");
-                    cpf = input.nextInt();
-
-                    System.out.println("Endereço do autor: ");
-                    endereco = input.next();
-
-                    System.out.println("Idade do autor: ");
-                    idade = input.nextInt();
-
-                    Autor autor = new Autor(nomeAutor, idade);
-                    Livro book = new Livro(autor, editora, price);
+                        book.informacoesDoLivro();
+                    } catch (Exception e) {
+                        System.out.println("Ocorreu um erro!");
+                    }
+                break;
+                case 4:
+                    
+                break;
+                case 5:
+                    looping = false;
                 break;
             }
             
