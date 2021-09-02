@@ -2,7 +2,7 @@ public class Livro {
     
     private String nome;
     private int quantPages;
-    private float preco;
+    private double preco;
     private String editora;
     private String descricao;
     private Autor autor;
@@ -19,7 +19,7 @@ public class Livro {
             this.quantPages = quantPages;
     }
 
-    public void setPreco(float preco){
+    public void setPreco(double preco){
         if(preco == 0) this.preco = 0;
         else 
             this.preco = preco;

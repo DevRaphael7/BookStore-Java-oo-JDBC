@@ -1,7 +1,7 @@
 public class LivroImpresso extends Livro{
     
-    public LivroImpresso(Autor autor){
-        super(autor);
+    public LivroImpresso(Autor autor, String nome){
+        super(autor, nome);
     }
 
     public boolean descontoPreco(double desconto){

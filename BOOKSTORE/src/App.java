@@ -6,9 +6,22 @@ public class App {
         boolean looping = true;
         int escolha = 0;
 
+        // Referenciando o objeto Autor e as subclasses da super classe Livro.
         Autor autor = new Autor(" ");
-        Livro book = new Livro(autor, "Nome do Autor");
+        Livro ebook = new Ebook(autor, "Nome do Autor");
+        Livro livroImpresso = new LivroImpresso(autor, "Nome do Autor");
+
+        /* --- Variáveis para a classe Livro --- */
+        String nomeLivro = " ", editora = " ", descricao = " ", tipoDeArquivo = " ";
+        int quantPages = 0;
+        double preco = 0;
+        /* --- Variáveis para a classe Autor --- */
+        String nomeAutor = " ", email = " ";
+        int idade = 0;
+
         Scanner input = new Scanner(System.in);
+
+        String escolhaLivro = " ";
 
         while(looping){
 
@@ -27,44 +40,91 @@ public class App {
 
                     //Informações sobre o LIVRO
                     System.out.println("Nome do autor do livro: ");
-                    autor.setNome(input.next());
+                    nomeAutor = input.next();    
 
                     System.out.println("Nome do livro: ");
-                    book.setNome(input.next());
+                    nomeLivro = input.next();
 
                     System.out.println("Preço do livro: ");
-
-                    book.setPreco(input.nextFloat());
+                    preco = input.nextDouble();
 
                     System.out.println("Editora do livro: ");
-                    book.setEditora(input.next());
+                    editora = input.next();
 
                     System.out.println("Descrição do livro: ");
-                    book.setDescricao(input.next());
+                    descricao = input.next();
 
                     System.out.println("Quantidade de páginas: ");
-                    book.setQuantPages(input.nextInt());
+                    quantPages = input.nextInt();
 
                     //Informações sobre o autor
                     System.out.println("Idade do autor: ");
-                    autor.setIdade(input.nextInt());
+                    idade = input.nextInt();
 
                     System.out.println("Email do autor: ");
-                    autor.setEmail(input.next());
+                    email = input.next();
 
-                    book.informacoesDoLivro();
+                    System.out.println("Ebook ou Livro Impresso: ");
+                    escolhaLivro = input.next();
+
+                    switch(escolhaLivro){
+                        case "Ebook":
+                            ebook.setNome(nomeLivro);
+                            autor.setNome(nomeAutor);
+                            autor.setIdade(idade);
+                            autor.setEmail(email);
+                            ebook.setAutor(autor);
+                            ebook.setEditora(editora);
+                            ebook.setDescricao(descricao);
+                            ebook.setPreco(preco);
+                            ebook.setQuantPages(quantPages);
+                            
+                            ebook.informacoesDoLivro();
+                        break;
+                        case "Livro Impresso":
                     
+                            livroImpresso.setNome(nomeLivro);
+                            autor.setNome(nomeAutor);
+                            autor.setIdade(idade);
+                            autor.setEmail(email);
+                            livroImpresso.setAutor(autor);
+                            livroImpresso.setEditora(editora);
+                            livroImpresso.setDescricao(descricao);
+                            livroImpresso.setPreco(preco);
+                            livroImpresso.setQuantPages(quantPages);
+
+                            livroImpresso.informacoesDoLivro();
+                        break;
+                        default:
+                            System.out.println("Você deve digitar uma das duas opções (Ebook ou Livro Impresso)!");
+                        break;
+                    }
+
                 break;
                 case 4:
-                    
-                    System.out.println("Aplicar desconto de: ");
-                    double desconto = input.nextDouble();
-                    double novoValor = 0;
+                    escolhaLivro = input.next();
 
-                    if(book.descontoPreco(desconto)) 
-                        novoValor = book.getPreco() - (book.getPreco() * (desconto * book.getPreco()));
-                    else break;
+                    if(escolhaLivro == "Ebook" ){
 
+                        System.out.println("Aplicar desconto de: ");
+                        double desconto = input.nextDouble();
+                        double novoValor = 0;
+
+                        if(ebook.descontoPreco(desconto)) 
+                            novoValor = ebook.getPreco() - (ebook.getPreco() * (desconto * ebook.getPreco()));
+                        else break;
+
+                    }else if(escolhaLivro == "Livro Impresso"){
+
+                        System.out.println("Aplicar desconto de: ");
+                        double desconto = input.nextDouble();
+                        double novoValor = 0;
+
+                        if(livroImpresso.descontoPreco(desconto)) 
+                            novoValor = livroImpresso.getPreco() - (livroImpresso.getPreco() * (desconto * livroImpresso.getPreco()));
+                        else break;
+
+                    }
                 break;
                 case 5:
                     looping = false;
