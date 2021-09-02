@@ -76,12 +76,15 @@ public class Livro {
 
     public boolean descontoPreco(double desconto){
         desconto = desconto / 100;
-        if(desconto > 0.30) return true;
+        if(desconto <= 0.30) return true;
         return false;
     }
 
-    public Livro(Autor autor){
+    public Livro(Autor autor, String nome){
         this.autor = autor;
+        this.nome = nome;
+        this.preco = 0;
+        this.editora = " ";
     }
 
 }

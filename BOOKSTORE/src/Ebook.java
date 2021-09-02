@@ -20,9 +20,8 @@ public class Ebook extends Livro{
         return false;
     }
 
-    public Ebook(Autor autor){
-        super(autor);
+    public Ebook(Autor autor, String nome){
+        super(autor, nome);
     }
-
 
 }
