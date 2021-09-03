@@ -7,8 +7,8 @@ public class App {
         int escolha = 0;
 
         // Referenciando o objeto Autor e as subclasses da super classe Livro.
-        Autor autor = new Autor(" ");
-        Livro ebook = new Ebook(autor, "Nome do Autor");
+        Autor autor = new Autor("");
+        Ebook ebook = new Ebook(autor, "Nome do Autor");
         Livro livroImpresso = new LivroImpresso(autor, "Nome do Autor");
 
         /* --- Variáveis para a classe Livro --- */
@@ -19,24 +19,30 @@ public class App {
         String nomeAutor = " ", email = " ";
         int idade = 0;
 
+        boolean invalido = true;
+
         Scanner input = new Scanner(System.in);
 
-        String escolhaLivro = " ";
+        int escolhaLivro = 0;
 
         while(looping){
 
             System.out.println("----");
             System.out.println("1) Cadastrar livro");
             System.out.println("2) Lista dos livros cadastrados");
-            System.out.println("3) Remover livros");
-            System.out.println("4) Aplicar desconto");
-            System.out.println("5) Sair do programa");
+            System.out.println("3) Informações do livro");
+            System.out.println("4) Remover livros");
+            System.out.println("5) Aplicar desconto");
+            System.out.println("6) Sair do programa");
             System.out.println("----\n");
 
             escolha = input.nextInt();
 
             switch(escolha){
                 case 1:
+
+                    System.out.println("(1) Ebook ou Livro (2)Impresso: ");
+                    escolhaLivro = input.nextInt();
 
                     //Informações sobre o LIVRO
                     System.out.println("Nome do autor do livro: ");
@@ -57,6 +63,16 @@ public class App {
                     System.out.println("Quantidade de páginas: ");
                     quantPages = input.nextInt();
 
+                    if(escolhaLivro == 1){
+                        System.out.println("Extensão do arquivo (EBOOK): ");
+                        ebook.setTipoDeArquivo(input.next());
+
+                        if(ebook.getTipoDeArquivo() == " "){
+                            System.out.println("Tipo de arquivo inválido");
+                            invalido = false;
+                        }
+                    }
+
                     //Informações sobre o autor
                     System.out.println("Idade do autor: ");
                     idade = input.nextInt();
@@ -64,47 +80,51 @@ public class App {
                     System.out.println("Email do autor: ");
                     email = input.next();
 
-                    System.out.println("Ebook ou Livro Impresso: ");
-                    escolhaLivro = input.next();
+                    if(invalido){
 
-                    switch(escolhaLivro){
-                        case "Ebook":
-                            ebook.setNome(nomeLivro);
-                            autor.setNome(nomeAutor);
-                            autor.setIdade(idade);
-                            autor.setEmail(email);
-                            ebook.setAutor(autor);
-                            ebook.setEditora(editora);
-                            ebook.setDescricao(descricao);
-                            ebook.setPreco(preco);
-                            ebook.setQuantPages(quantPages);
-                            
-                            ebook.informacoesDoLivro();
-                        break;
-                        case "Livro Impresso":
-                    
-                            livroImpresso.setNome(nomeLivro);
-                            autor.setNome(nomeAutor);
-                            autor.setIdade(idade);
-                            autor.setEmail(email);
-                            livroImpresso.setAutor(autor);
-                            livroImpresso.setEditora(editora);
-                            livroImpresso.setDescricao(descricao);
-                            livroImpresso.setPreco(preco);
-                            livroImpresso.setQuantPages(quantPages);
+                        switch(escolhaLivro){
+                            case 1:
+                                ebook.setNome(nomeLivro);
+                                autor.setNome(nomeAutor);
+                                autor.setIdade(idade);
+                                autor.setEmail(email);
+                                autor.informacoesDoAutor();
+                                ebook.setAutor(autor);
+                                ebook.setEditora(editora);
+                                ebook.setDescricao(descricao);
+                                ebook.setPreco(preco);
+                                ebook.setQuantPages(quantPages);
+                                
+                                ebook.informacoesDoLivro();
+                            break;
+                            case 2:
+                        
+                                livroImpresso.setNome(nomeLivro);
+                                autor.setNome(nomeAutor);
+                                autor.setIdade(idade);
+                                autor.setEmail(email);
+                                livroImpresso.setAutor(autor);
+                                livroImpresso.setEditora(editora);
+                                livroImpresso.setDescricao(descricao);
+                                livroImpresso.setPreco(preco);
+                                livroImpresso.setQuantPages(quantPages);
 
-                            livroImpresso.informacoesDoLivro();
-                        break;
-                        default:
-                            System.out.println("Você deve digitar uma das duas opções (Ebook ou Livro Impresso)!");
-                        break;
+                                livroImpresso.informacoesDoLivro();
+                            break;
+                            default:
+                                System.out.println("Você deve digitar uma das duas opções (Ebook ou Livro Impresso)!");
+                            break;
+                        }
+
                     }
-
+                break;
+                case 3:
+                    ebook.informacoesDoLivro();
                 break;
                 case 4:
-                    escolhaLivro = input.next();
+                    escolhaLivro = input.nextInt();
 
-                    if(escolhaLivro == "Ebook" ){
+                    if(escolhaLivro == 1 ){
 
                         System.out.println("Aplicar desconto de: ");
                         double desconto = input.nextDouble();
@@ -114,7 +134,7 @@ public class App {
                             novoValor = ebook.getPreco() - (ebook.getPreco() * (desconto * ebook.getPreco()));
                         else break;
 
-                    }else if(escolhaLivro == "Livro Impresso"){
+                    }else if(escolhaLivro == 2){
 
                         System.out.println("Aplicar desconto de: ");
                         double desconto = input.nextDouble();
