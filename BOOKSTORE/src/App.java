@@ -10,6 +10,7 @@ public class App {
         Autor autor = new Autor("");
         Ebook ebook = new Ebook(autor, "Nome do Autor");
         Livro livroImpresso = new LivroImpresso(autor, "Nome do Autor");
+        Programa program = new Programa();
 
         /* --- Variáveis para a classe Livro --- */
         String nomeLivro = " ", editora = " ", descricao = " ", tipoDeArquivo = " ";
@@ -26,23 +27,14 @@ public class App {
         int escolhaLivro = 0;
 
         while(looping){
-
-            System.out.println("----");
-            System.out.println("1) Cadastrar livro");
-            System.out.println("2) Lista dos livros cadastrados");
-            System.out.println("3) Informações do livro");
-            System.out.println("4) Remover livros");
-            System.out.println("5) Aplicar desconto");
-            System.out.println("6) Sair do programa");
-            System.out.println("----\n");
-
+            
+            program.opcoesDoPrograma();
             escolha = input.nextInt();
 
             switch(escolha){
                 case 1:
 
-                    System.out.println("(1) Ebook ou Livro (2)Impresso: ");
-                    escolhaLivro = input.nextInt();
+                    program.ebookOuLivroImpresso(input, escolhaLivro);
 
                     //Informações sobre o LIVRO
                     System.out.println("Nome do autor do livro: ");
@@ -65,9 +57,9 @@ public class App {
 
                     if(escolhaLivro == 1){
                         System.out.println("Extensão do arquivo (EBOOK): ");
-                        ebook.setTipoDeArquivo(input.next());
+                        tipoDeArquivo = input.next();
 
-                        if(ebook.getTipoDeArquivo() == " "){
+                        if(tipoDeArquivo == " "){
                             System.out.println("Tipo de arquivo inválido");
                             invalido = false;
                         }
@@ -94,6 +86,7 @@ public class App {
                                 ebook.setDescricao(descricao);
                                 ebook.setPreco(preco);
                                 ebook.setQuantPages(quantPages);
+                                ebook.setTipoDeArquivo(tipoDeArquivo);
                                 
                                 ebook.informacoesDoLivro();
                             break;
@@ -119,30 +112,38 @@ public class App {
                     }
                 break;
                 case 3:
-                    ebook.informacoesDoLivro();
+
+                    program.ebookOuLivroImpresso(input, escolhaLivro);
+
+                    if (escolhaLivro == 1) ebook.informacoesDoLivro();
+                    else if (escolhaLivro == 2) livroImpresso.informacoesDoLivro();
+                    else System.out.println("Escolha inválida");
+
                 break;
                 case 4:
-                    escolhaLivro = input.nextInt();
+                    program.ebookOuLivroImpresso(input, escolhaLivro);
 
-                    if(escolhaLivro == 1 ){
-
-                        System.out.println("Aplicar desconto de: ");
-                        double desconto = input.nextDouble();
-                        double novoValor = 0;
-
-                        if(ebook.descontoPreco(desconto)) 
-                            novoValor = ebook.getPreco() - (ebook.getPreco() * (desconto * ebook.getPreco()));
-                        else break;
-
-                    }else if(escolhaLivro == 2){
+                    if (escolhaLivro == 1 ) {
 
                         System.out.println("Aplicar desconto de: ");
                         double desconto = input.nextDouble();
-                        double novoValor = 0;
 
-                        if(livroImpresso.descontoPreco(desconto)) 
-                            novoValor = livroImpresso.getPreco() - (livroImpresso.getPreco() * (desconto * livroImpresso.getPreco()));
-                        else break;
+                        if (ebook.descontoPreco(desconto)) {
+                            desconto = ((desconto/100) * ebook.getPreco());
+                            desconto = ebook.getPreco() - desconto;
+                            ebook.setPreco(desconto);
+                        } else break;
+
+                    } else if(escolhaLivro == 2) {
+
+                        System.out.println("Aplicar desconto de: ");
+                        double desconto = input.nextDouble();
+            
+                        if (livroImpresso.descontoPreco(desconto)) {
+                            desconto = ((desconto/100) * livroImpresso.getPreco());
+                            desconto = livroImpresso.getPreco() - desconto;
+                            livroImpresso.setPreco(desconto);
+                        } else break;
 
                     }
                 break;

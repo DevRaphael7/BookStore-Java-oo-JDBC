@@ -32,15 +32,15 @@ public class Autor {
         this.email = email;
     }
 
-    void informacoesDoAutor(){
-        System.out.println("----(Informações do autor)");
+    public void informacoesDoAutor(){
+        System.out.println("\n----(Informações do autor)");
         System.out.println("Nome do autor: " + getNome());
         System.out.println("Idade: " + getIdade());
         System.out.println("E-mail: " + getEmail());
         System.out.println("----");
     }
     
-    Autor(String nome){
+    public Autor(String nome){
         this.nome = nome;
     }
 }

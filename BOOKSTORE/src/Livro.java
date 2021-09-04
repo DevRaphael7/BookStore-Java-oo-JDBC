@@ -8,27 +8,21 @@ public abstract class Livro {
     private Autor autor;
     
     public void setNome(String nome){
-        if(nome == "") this.nome = "Nome invalido!";
-        else
-            this.nome = nome;
+        if(nome == "") this.nome = "Nome inválido";
+        else this.nome = nome;
     }
 
     public void setQuantPages(int quantPages){
-        if(quantPages == 0) this.quantPages = 0;
-        else 
-            this.quantPages = quantPages;
+        this.quantPages = quantPages;
     }
 
     public void setPreco(double preco){
-        if(preco == 0) this.preco = 0;
-        else 
             this.preco = preco;
     }
 
     public void setEditora(String editora){
-        if(editora == "") this.editora = "Nome invalido!";
-        else 
-            this.editora = editora;
+        if(editora == "" || editora == " ") this.editora = "Nome invalido!";
+        else this.editora = editora;
     }
 
     public void setDescricao(String descricao){
@@ -62,21 +56,20 @@ public abstract class Livro {
     public Autor getNomeDoAutor(){
         return autor;
     }
-
+    
     public void informacoesDoLivro(){
-        System.out.println("----(Informações do livro)");
+        System.out.println("----(Informações do livro)----");
         System.out.println("Nome: " + getNome());
         System.out.println("Nome do autor: " + autor.getNome());
         System.out.println("Quantidade de páginas: " + getQuantPages());
         System.out.println("Preço: " + getPreco());
         System.out.println("Editora: " + getEditora());
         System.out.println("Descrição: " + getDescricao());
-        System.out.println("----");
+        autor.informacoesDoAutor();
     }
 
     public boolean descontoPreco(double desconto){
-        desconto = desconto / 100;
-        if(desconto <= 0.30) return true;
+        if(desconto <= 30) return true;
         return false;
     }
 
