@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import ConexaoBD.LoadDB;
+
 public class App {
     public static void main(String[] args){
 
