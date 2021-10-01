@@ -88,25 +88,33 @@ public class App {
                 case 4:
                     program.ebookOuLivroImpresso(input);
 
-                    if (program.escolhaLivro == 1 ) {
+                    System.out.println("Insira o ID para buscar o livro: ");
+                    int buscarRegistroID = input.nextInt();
+
+                    if (program.escolhaLivro == 1) {
 
                         System.out.println("Aplicar desconto de: ");
                         double desconto = input.nextDouble();
+                        double preco = conection.getValue("SELECT (preco) FROM Livro WHERE id = " + buscarRegistroID, "preco");
 
                         if (ebook.descontoPreco(desconto)) {
-                            desconto = ((desconto/100) * ebook.getPreco());
-                            desconto = ebook.getPreco() - desconto;
-                            ebook.setPreco(desconto);
+                            preco = preco - (preco * (desconto/100));
+                            ebook.setPreco(preco);
+                            String query = "UPDATE Livro SET preco = " + ebook.getPreco() + " WHERE id = " + buscarRegistroID + " and tipoDeLivro = 'Ebook'";
+                            conection.insertValues(query);
                         } else break;
 
                     } else if(program.escolhaLivro == 2) {
+                        
                         System.out.println("Aplicar desconto de: ");
                         double desconto = input.nextDouble();
+                        double preco = conection.getValue("SELECT (preco) FROM Livro WHERE id = " + buscarRegistroID, "preco");
             
                         if (livroImpresso.descontoPreco(desconto)) {
-                            desconto = ((desconto/100) * livroImpresso.getPreco());
-                            desconto = livroImpresso.getPreco() - desconto;
-                            livroImpresso.setPreco(desconto);
+                            preco = preco - (preco * (desconto/100));
+                            livroImpresso.setPreco(preco);
+                            String query = "UPDATE Livro SET preco = " + livroImpresso.getPreco() + " WHERE id = " + buscarRegistroID + " and tipoDeLivro = 'Livro Impresso'";
+                            conection.insertValues(query);
                         } else break;
                     }
                 break;

@@ -24,6 +24,7 @@ public class ConexaoDB {
         try{
             // Com isso faço a conexão com o banco de dados
             conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Banco de dados conectado com sucesso!");
 
             //Executar comando (QUERY)
             statement = conn.createStatement();
@@ -68,6 +69,28 @@ public class ConexaoDB {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public double getValue(String query, String column){
+
+        double value = 0;
+        
+        try{
+
+            conn = DriverManager.getConnection(url, user, password);
+            
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while(rs.next()){
+                value = rs.getDouble(column);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return value;
     }
 
     public ConexaoDB(String url, String user, String password){
