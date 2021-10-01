@@ -4,7 +4,7 @@ public class Ebook extends Livro{
     private Autor autor;
 
     public void setTipoDeArquivo(String tipoDeArquivo){
-        if(tipoDeArquivo == ".pdf" || tipoDeArquivo == "PDF" || tipoDeArquivo == ".epub" || tipoDeArquivo == "PUB") 
+        if(tipoDeArquivo.contains("PUB") || tipoDeArquivo.contains("PDF") || tipoDeArquivo.contains(".pdf") || tipoDeArquivo.contains(".pub")) 
             this.tipoDeArquivo = tipoDeArquivo;
         else this.tipoDeArquivo = "Extensão de arquivo desconhecida";
     }

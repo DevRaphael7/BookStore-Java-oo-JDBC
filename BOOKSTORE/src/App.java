@@ -28,7 +28,7 @@ public class App {
 
             switch(escolha){
                 case 1:
-                
+                    
                     program.cadastrandoOLivro(input);
 
                     if(program.invalido){
@@ -46,7 +46,7 @@ public class App {
                                 ebook.setQuantPages(program.quantPages);
                                 ebook.setTipoDeArquivo(program.tipoDeArquivo);
 
-                                conection.insertValues("");
+                                conection.insertValues("INSERT INTO Livro (quantPages, preco, editora, descricao, autor, tipoDeLivro, nome, extensaoDeArquivo) VALUES (" + ebook.getQuantPages() + "," + ebook.getPreco() + ", '" + ebook.getEditora() + "', '" + ebook.getEditora() + "', '" + autor.getNome() + "', 'Ebook' , '" + ebook.getNome() + "', '" + ebook.getTipoDeArquivo() + "')");
                                 
                                 ebook.informacoesDoLivro();
                             break;
@@ -73,15 +73,15 @@ public class App {
                 break;
                 case 2:
                     conection.selectValues("SELECT * FROM Livro");
-                    int teste = "Incapaz de compartilhar momentos de amizade e de compreender a magia do Natal, Ebenezer Scrooge só encontra refúgio na riqueza e na solidão. Até que, num 24 de dezembro, recebe a visita do fantasma de Jacob Marley, seu ex-sócio falecido há sete anos. É ele quem avisa a Scrooge que mais três espíritos o visitarão para lhe dar a chance de mudar seu triste fim e ser poupado de vagar a esmo depois de morto, como Marley. Assim, o Fantasma dos Natais Passados, o Fantasma do Natal Presente e o Fantasma dos Natais Futuros levarão o protagonista para uma viagem no tempo, mostrando-lhe que a generosidade é sempre a melhor escolha. Um dos livros mais carismáticos da literatura inglesa, Uma canção de Natal recebe o crédito por ter concebido a celebração desse evento como a entendemos hoje: uma ocasião para agradecer e ajudar o próximo.".length();
-                    System.out.println(teste);
                 break;
                 case 3:
 
                     program.ebookOuLivroImpresso(input);
 
-                    if (program.escolhaLivro == 1) ebook.informacoesDoLivro();
-                    else if (program.escolhaLivro == 2) livroImpresso.informacoesDoLivro();
+                    if (program.escolhaLivro == 1)
+                        conection.selectValues("SELECT * FROM Livro WHERE tipoDeLivro = 'Ebook' ");
+                    else if (program.escolhaLivro == 2) 
+                        conection.selectValues("SELECT * FROM Livro WHERE tipoDeLivro = 'Livro Impresso' ");
                     else System.out.println("Escolha inválida");
 
                 break;
@@ -100,7 +100,6 @@ public class App {
                         } else break;
 
                     } else if(program.escolhaLivro == 2) {
-
                         System.out.println("Aplicar desconto de: ");
                         double desconto = input.nextDouble();
             
@@ -109,7 +108,6 @@ public class App {
                             desconto = livroImpresso.getPreco() - desconto;
                             livroImpresso.setPreco(desconto);
                         } else break;
-
                     }
                 break;
                 case 5:

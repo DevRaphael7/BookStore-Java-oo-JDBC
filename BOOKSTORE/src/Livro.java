@@ -26,7 +26,8 @@ public abstract class Livro {
     }
 
     public void setDescricao(String descricao){
-        this.descricao = descricao;
+        if (descricao == "" || descricao == " ") this.descricao = "Sem descrição";
+        else this.descricao = descricao;
     }
 
     public void setAutor(Autor autor){
@@ -53,8 +54,8 @@ public abstract class Livro {
         return descricao;
     }
 
-    public Autor getNomeDoAutor(){
-        return autor;
+    public String getNomeDoAutor(){
+        return autor.getNome();
     }
     
     public void informacoesDoLivro(){
