@@ -1,6 +1,8 @@
 import java.util.Scanner;
+// import ConexaoBD.Cadastro;
+// import ConexaoBD.LoadDB;
 
-import ConexaoBD.LoadDB;
+import ConexaoBD.ConexaoDB;
 
 public class App {
     public static void main(String[] args){
@@ -13,6 +15,9 @@ public class App {
         Ebook ebook = new Ebook(autor, "Nome do Autor");
         Livro livroImpresso = new LivroImpresso(autor, "Nome do Autor");
         Programa program = new Programa();
+        ConexaoDB conection = new ConexaoDB("jdbc:mysql://localhost:3306/j_lan", "root", "1593571964@$Database");
+
+        // Cadastro cd = new Cadastro();
 
         Scanner input = new Scanner(System.in);
 
@@ -40,6 +45,8 @@ public class App {
                                 ebook.setPreco(program.preco);
                                 ebook.setQuantPages(program.quantPages);
                                 ebook.setTipoDeArquivo(program.tipoDeArquivo);
+
+                                conection.insertValues("");
                                 
                                 ebook.informacoesDoLivro();
                             break;
@@ -63,6 +70,11 @@ public class App {
                         }
 
                     }
+                break;
+                case 2:
+                    conection.selectValues("SELECT * FROM Livro");
+                    int teste = "Incapaz de compartilhar momentos de amizade e de compreender a magia do Natal, Ebenezer Scrooge só encontra refúgio na riqueza e na solidão. Até que, num 24 de dezembro, recebe a visita do fantasma de Jacob Marley, seu ex-sócio falecido há sete anos. É ele quem avisa a Scrooge que mais três espíritos o visitarão para lhe dar a chance de mudar seu triste fim e ser poupado de vagar a esmo depois de morto, como Marley. Assim, o Fantasma dos Natais Passados, o Fantasma do Natal Presente e o Fantasma dos Natais Futuros levarão o protagonista para uma viagem no tempo, mostrando-lhe que a generosidade é sempre a melhor escolha. Um dos livros mais carismáticos da literatura inglesa, Uma canção de Natal recebe o crédito por ter concebido a celebração desse evento como a entendemos hoje: uma ocasião para agradecer e ajudar o próximo.".length();
+                    System.out.println(teste);
                 break;
                 case 3:
 
