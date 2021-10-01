@@ -6,8 +6,8 @@ Na O.O do código existem cinco classes:
 
 1) Livro (Classe *abstrata*).
 2) LivroImpresso (Subclasse da super classe Livro).
-3) Ebook (Subclasse da classe super classe Livro).
-4) Autor (Classe do autor com seus próprios atrinutos como nome, email, cpf, etc).
+3) Ebook (Subclasse da super classe Livro).
+4) Autor (Classe do autor com seus próprios atributos como nome, email, cpf, etc).
 5) ConexaoBD (Classe que realiza operações como SELECT, INSERT e UPDATE)
 
 ## Como conectar com o banco de dados?
